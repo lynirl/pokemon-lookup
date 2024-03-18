@@ -27,15 +27,19 @@ let updatePage = function(data) {
     //debug: on a trouvé la bonne information?
     console.log(pokemonData.name);
 
-    //update final de la page
+    //! update final de la page
+    //ajouter le nom du pokémon et son sprite
     view.searchResult.innerHTML += `
     <h3>${capitalize(pokemonData.name)}</h3>
     <br>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>`;
-    //récupérer les abilities possibles
-    for (let i in pokemonData.abilities) {
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>`
+
+    //ajouter ses types
+    view.searchResult.innerHTML += `
+    <h4>Types</h4>`
+    for (let i in pokemonData.types) {
         //note: dans ce cas on parcourt pokemonData -> abilities -> 0 ou 1 -> ability -> name
-        view.searchResult.innerHTML += `<p>${pokemonData.abilities[i].ability.name}</p>`;
+        view.searchResult.innerHTML += `<img src='images/types/${pokemonData.types[i].type.name}.png'>`;
     };
 }
 
