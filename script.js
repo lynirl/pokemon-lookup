@@ -43,6 +43,20 @@ let updatePage = function(data) {
     };
 }
 
+//faire les descriptions
+let updateDesc = function(data){
+    const pokemonData = JSON.parse(data['contents']);
+
+    view.imgPoke.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png`;
+    view.name.text = pokemonData.name;
+
+    for(let i in pokemonData.stat){
+        if(pokemonData.stat[i].stat.name = "attack"){
+            let attack = pokemonData.stat[i].stat.base
+        }
+    }
+}
+
 /**
  * la requete AJAX principale
  * va chercher les informations en récupérant le nom indiqué dans la barre de recherche
