@@ -56,7 +56,7 @@
         </div>
 
         <!-- Résultats de recherche -->
-        <div id="bloc-gif-attente">
+        <div id="bloc-gif-attente" hidden>
           <img
             src="images/attente-ajax.gif"
             alt="GIF Attente de résultats"
@@ -64,7 +64,6 @@
           />
         </div>
         <div id="bloc-resultats">
-          <p class="res">Résultat 1 ...</p>
         </div>
       </section>
 
@@ -73,9 +72,9 @@
 
       <!-- Section des recherches favorites -->
       <section id="section-favoris">
-        <h2>Recherches favorites</h2>
+        <h2>Equipes favorites</h2>
         <p>
-          Cliquer sur une recherche favorite ci-dessus pour relancer celle-ci :
+          Cliquer sur un Pokémon favori ci-dessous pour voir sa description: 
         </p>
         <ul id="liste-favoris">
           <li>
@@ -87,26 +86,9 @@
               title="Cliquer pour supprimer le favori"
             />
           </li>
-          <li>
-            <span title="Cliquer pour relancer la recherche">Lyon</span>
-            <img
-              src="images/croix.svg"
-              alt="Icone pour supprimer le favori"
-              width="15"
-              title="Cliquer pour supprimer le favori"
-            />
-          </li>
-          <li>
-            <span title="Cliquer pour relancer la recherhe.">Web</span>
-            <img
-              src="images/croix.svg"
-              alt="Icone pour supprimer le favori"
-              width="15"
-              title="Cliquer pour supprimer le favori"
-            />
-          </li>
         </ul>
-        <p class="info-vide">(Aucune recherche favorite)</p>
+        <!-- caché mais on va le révéler si il y a des résultats -->
+        <p class="info-vide" hidden>(Aucune recherche favorite)</p>
       </section>
     </main>
     <script src = "view.js"> </script>

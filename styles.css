@@ -108,15 +108,23 @@ h1 {
 
 /* GIF de chargement (caché par défaut) */
 #bloc-gif-attente {
-  display: none;
   margin: 40px;
   text-align: center;
 }
 
-#bloc-resultats p.res::before {
-  /* Affichage d'une flèche devant chaque résultat
-		(Cf. https://unicode-table.com/fr/21E8/ ) */
-  content: "\21E8\00A0";
+#bloc-resultats {
+  border-radius: 5px;
+  border: #a1a1a1 solid 4px;
+  margin-top: 4%;
+  background-color: #fafafa;
+  width: 50%;
+  padding-left: 3%;
+  padding-top: 1%;
+  padding-bottom: 3%;
+}
+
+#bloc-resultats h3,h4 {
+color: black;
 }
 
 /* Section de la barre de séparation */
