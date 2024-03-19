@@ -20,5 +20,11 @@ const view = {
 
     defS: document.getElementById("defs"),
 
-    vit: document.getElementById("vit")
+    vit: document.getElementById("vit"),
+
+    btnTeam: document.getElementById("newTeam"),
+
+    equipeFav: document.getElementById("liste-favoris")
+
+     
 }

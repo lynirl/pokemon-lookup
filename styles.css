@@ -176,3 +176,9 @@ color: black;
     flex: 0;
   }
 }
+#newTeam{
+  background-color: red;
+  border-radius: 30px;
+  border: #2d2d2d 2px solid;
+  width: 50px;
+}

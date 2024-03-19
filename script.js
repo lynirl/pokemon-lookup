@@ -1,5 +1,7 @@
 
 view.searchResult.hidden = true;
+let equipeList = [];
+let currPokemon = null;
 
 /**
  *? capitalize
@@ -24,6 +26,8 @@ let updatePage = function(data) {
     //donc pas le status en plus quoi
     const pokemonData = data;
 
+    //on stock le pokemon actuellement recherché
+    currPokemon = pokemonData;
     //debug: on a trouvé la bonne information?
     console.log(pokemonData.name);
 
@@ -63,10 +67,29 @@ let updatePage = function(data) {
     
         view.searchResult.innerHTML+=
         `</div>`
-    };
+    }
+    view.searchResult.innerHTML +=
+    '<button id = "ajouterPokemon">Ajouter a une equipe </button>'
     view.searchResult.hidden = false;
+
+    //obliger de recuperer des element de la vue ici car l'element est creer après le chargement du view.js
+
+    document.getElementById("ajouterPokemon").addEventListener('click', ajouterPokemon);
 }
 
+
+//ajout d'un pokemon dans une equipe 
+let ajouterPokemon = function(){
+    console.log(equipeList[0]);
+    let nom = prompt("A quelle equipe voulez vous ajoutez ce pokemon");
+
+    for(let equipe in equipeList){
+        if(equipe._nom == nom){
+            equipe.addPokemon(currPokemon);
+            alert(currPokemon)
+        }
+    }
+}
 /**
  *? la requete AJAX principale
  * va chercher les informations en récupérant le nom indiqué dans la barre de recherche
@@ -75,6 +98,9 @@ let updatePage = function(data) {
  * actualise la page lorsque tout est bon
  * TODO: gérer les erreurs
  */
+
+
+
 let requeteAjax = async function() {
     view.loader.hidden = false;
     //on récupère le nom du pokémon et on construit le lien en fonction
@@ -100,5 +126,21 @@ let requeteAjax = async function() {
     view.loader.hidden = true;
 }
 
+let newTeam =function() {
+    let nom = prompt("Veuillez entrer un nom d'equipe :");
+    let equipe = new Equipe(nom);
+    equipeList.push(equipe);
+    view.equipeFav.innerHTML += 
+    `<li>
+    <h3>${nom}</h3>
+    <div class = "equipe">
+    
+    </div>
+    </li>`
+    
+}
 //event du bouton de recherche
 view.boutonSearch.addEventListener('click', requeteAjax);
+
+view.btnTeam.addEventListener('click',newTeam);
+
