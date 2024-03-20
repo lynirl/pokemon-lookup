@@ -87,6 +87,7 @@ let ajouterPokemon = function(){
         if(equipeList[i]._nom == nom){
             equipeList[i].addPokemon(currPokemon);
             document.getElementById(equipeList[i]._nom).innerHTML += `<img src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currPokemon.id}.png" alt ="blank">`;
+            localStorage.setItem('equipeList', JSON.stringify(equipeList));
         }
     }
 }
@@ -136,10 +137,40 @@ let newTeam =function() {
     <div id = "${nom}">
     
     </div>
-    </li>`
+    </li>`;
+    localStorage.setItem('equipeList', JSON.stringify(equipeList));
 }
+
+// Fonction pour charger les équipes depuis le local storage
+let loadEquipesFromLocalStorage = function () {
+    const storedEquipeList = localStorage.getItem('equipeList');
+    if (storedEquipeList) {
+        equipeList = JSON.parse(storedEquipeList);
+        let equipeListParse = [];
+        equipeList.forEach(equipe => {
+            let classEquipe = new Equipe(equipe._nom);
+            classEquipe.setPokemons(equipe._pokemons);
+            equipeListParse.push(classEquipe);
+        });
+        equipeList = equipeListParse;
+        equipeList.forEach(equipe => {
+            view.equipeFav.innerHTML += `
+                <li>
+                    <h3>${equipe._nom}</h3>
+                    <div id="${equipe._nom}">`;
+        if(equipe._pokemons != null){
+            equipe._pokemons.forEach(pokemon => {
+                document.getElementById(equipe._nom).innerHTML += `<img src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt ="blank">`
+            });
+        }      
+        view.equipeFav.innerHTML += `</div>  </li>`;
+        });
+    }
+}
+
 //event du bouton de recherche
 view.boutonSearch.addEventListener('click', requeteAjax);
 
 view.btnTeam.addEventListener('click',newTeam);
 
+window.addEventListener('load', loadEquipesFromLocalStorage);

@@ -13,6 +13,10 @@ class Equipe{
     getNom(){
         return this._nom;
     }
+
+    setPokemons(pokemons){
+        this._pokemons = pokemons;
+    }
     isFull(){
         if(this._pokemons.length == 6 ){
             return true;
