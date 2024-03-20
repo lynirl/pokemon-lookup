@@ -22,7 +22,7 @@ class Equipe{
     }
 
     addPokemon(pokemon){
-        if(this.isFull){
+        if(this.isFull ==  true){
             throw "Cette equipe est complete";
         }else{
             this._pokemons.push(pokemon);

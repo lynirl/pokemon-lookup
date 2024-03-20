@@ -2,6 +2,7 @@
 view.searchResult.hidden = true;
 let equipeList = [];
 let currPokemon = null;
+let divEquipe;
 
 /**
  *? capitalize
@@ -83,10 +84,10 @@ let ajouterPokemon = function(){
     console.log(equipeList[0]);
     let nom = prompt("A quelle equipe voulez vous ajoutez ce pokemon");
 
-    for(let equipe in equipeList){
-        if(equipe._nom == nom){
-            equipe.addPokemon(currPokemon);
-            alert(currPokemon)
+    for(let i = 0 ; i< equipeList.length;i++){
+        if(equipeList[i]._nom == nom){
+            equipeList[i].addPokemon(currPokemon);
+            divEquipe.innerHTML += `<img src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currPokemon.id}.png" alt ="blank">`
         }
     }
 }
@@ -133,10 +134,11 @@ let newTeam =function() {
     view.equipeFav.innerHTML += 
     `<li>
     <h3>${nom}</h3>
-    <div class = "equipe">
+    <div id = "${nom}">
     
     </div>
     </li>`
+    divEquipe = document.getElementById(nom);
     
 }
 //event du bouton de recherche
