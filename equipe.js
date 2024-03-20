@@ -18,7 +18,7 @@ class Equipe{
         this._pokemons = pokemons;
     }
     isFull(){
-        if(this._pokemons.length == 6 ){
+        if(this._pokemons.length >= 6 ){
             return true;
         }else{
             return false;
@@ -26,7 +26,7 @@ class Equipe{
     }
 
     addPokemon(pokemon){
-        if(this.isFull ==  true){
+        if(this.isFull === true){
             throw "Cette equipe est complete";
         }else{
             this._pokemons.push(pokemon);

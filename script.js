@@ -32,7 +32,52 @@ let updatePage = function(data) {
     console.log(pokemonData.name);
 
     //! update final de la page
-    //ajouter le nom du pokémon et son sprite
+    view.searchResult.innerHTML = "";
+    view.searchResult.innerHTML += `
+    <h3>${capitalize(pokemonData.name)}</h3>
+    <br>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>`
+
+    //ajouter ses types
+    view.searchResult.innerHTML += `
+    <h4>Types</h4>`
+    for (let i in pokemonData.types) {
+        //note: dans ce cas on parcourt pokemonData -> abilities -> 0 ou 1 -> ability -> name
+        view.searchResult.innerHTML += `<img src='images/types/${pokemonData.types[i].type.name}.png'>`;
+    };
+    view.searchResult.innerHTML += `
+    <br>
+    <h4>Cri</h4>
+    <audio controls>
+        <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokemonData.id}.ogg" type="audio/ogg">
+    </audio>`
+
+    for(let i in pokemonData.stats){
+        view.searchResult.innerHTML+=
+        `<div class = "stat">`
+    
+        view.searchResult.innerHTML+=
+        `<section class = "ensStat">
+            <h3>${pokemonData.stats[i].stat.name}</h3>
+        <section id = "att">
+            <bold>${pokemonData.stats[i].base_stat}</bold>
+            <progress value="${pokemonData.stats[i].base_stat}" max="250"></progress> 
+            </section>    
+        </section>`
+    
+        view.searchResult.innerHTML+=
+        `</div>`
+    }
+    view.searchResult.innerHTML +=
+    '<button id = "ajouterPokemon">Ajouter a une equipe </button>'
+    view.searchResult.hidden = false;
+
+    //obliger de recuperer des element de la vue ici car l'element est creer après le chargement du view.js
+
+    document.getElementById("ajouterPokemon").addEventListener('click', ajouterPokemon);
+}
+
+function displayPokemon(pokemonData){   
     view.searchResult.innerHTML += `
     <h3>${capitalize(pokemonData.name)}</h3>
     <br>
@@ -133,12 +178,13 @@ let newTeam =function() {
     equipeList.push(equipe);
     view.equipeFav.innerHTML += 
     `<li>
-    <h3>${nom}</h3>
+    <button id = "${nom}">${nom}</h3>
     <div id = "${nom}">
     
     </div>
     </li>`;
     localStorage.setItem('equipeList', JSON.stringify(equipeList));
+    
 }
 
 // Fonction pour charger les équipes depuis le local storage
@@ -156,17 +202,27 @@ let loadEquipesFromLocalStorage = function () {
         equipeList.forEach(equipe => {
             view.equipeFav.innerHTML += `
                 <li>
-                    <h3>${equipe._nom}</h3>
+                    <button>${equipe._nom}</h3>
                     <div id="${equipe._nom}">`;
         if(equipe._pokemons != null){
             equipe._pokemons.forEach(pokemon => {
                 document.getElementById(equipe._nom).innerHTML += `<img src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt ="blank">`
             });
         }      
-        view.equipeFav.innerHTML += `</div>  </li>`;
+        view.equipeFav.innerHTML += `</div>  </li>`;  
+       
+                document.getElementById(equipe._nom).addEventListener('click',function(){
+                    view.searchResult.innerHTML = "";
+                    equipe._pokemons.forEach(pokemon => {
+                        displayPokemon(pokemon);
+                    });         
         });
+    });
     }
 }
+
+
+
 
 //event du bouton de recherche
 view.boutonSearch.addEventListener('click', requeteAjax);
@@ -174,3 +230,5 @@ view.boutonSearch.addEventListener('click', requeteAjax);
 view.btnTeam.addEventListener('click',newTeam);
 
 window.addEventListener('load', loadEquipesFromLocalStorage);
+
+
