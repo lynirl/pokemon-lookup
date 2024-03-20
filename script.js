@@ -2,8 +2,7 @@
 view.searchResult.hidden = true;
 let equipeList = [];
 let currPokemon = null;
-let divEquipe;
-
+let equipeListChaine;
 /**
  *? capitalize
  * @param {*} text : un texte quelconque
@@ -87,7 +86,7 @@ let ajouterPokemon = function(){
     for(let i = 0 ; i< equipeList.length;i++){
         if(equipeList[i]._nom == nom){
             equipeList[i].addPokemon(currPokemon);
-            divEquipe.innerHTML += `<img src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currPokemon.id}.png" alt ="blank">`
+            document.getElementById(equipeList[i]._nom).innerHTML += `<img src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currPokemon.id}.png" alt ="blank">`;
         }
     }
 }
@@ -138,8 +137,6 @@ let newTeam =function() {
     
     </div>
     </li>`
-    divEquipe = document.getElementById(nom);
-    
 }
 //event du bouton de recherche
 view.boutonSearch.addEventListener('click', requeteAjax);

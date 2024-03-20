@@ -182,3 +182,9 @@ color: black;
   border: #2d2d2d 2px solid;
   width: 50px;
 }
+#ajouterPokemon{
+  background-color: red;
+  border-radius: 30px;
+  border: #2d2d2d 2px solid;
+  width: 200px;
+}

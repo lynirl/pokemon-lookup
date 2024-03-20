@@ -28,4 +28,12 @@ class Equipe{
             this._pokemons.push(pokemon);
         }
     }
+
+    storeTeam(){
+        if(this._pokemons != null){
+        localStorage.setItem(this._nom,JSON.stringify(this._pokemons));            
+    }else{
+        localStorage.setItem(this._nom,"");            
+    }
+}
 }
