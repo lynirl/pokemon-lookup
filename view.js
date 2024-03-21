@@ -5,6 +5,9 @@ const view = {
     pokemonFind: document.getElementById("pokemonFind"),
     //la où on affiche le résultat
     searchResult: document.getElementById("bloc-resultats"),
+    //les deux divs
+    result1: document.getElementById("result1"),
+    result2: document.getElementById("result2"),
 
     loader: document.getElementById("bloc-gif-attente"),
 

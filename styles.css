@@ -11,13 +11,18 @@
   --almost-black: #2d2d2d;
 }
 
+@font-face {
+  font-family: pokeFont;
+  src: url(pokemon_pixel_font.woff);
+}
+
 * {
   color: var(--text-color);
 }
 
 body {
   
-  background-image:  url("/images/background.png");
+  background-image:  url("./images/background.png");
   background-repeat: no-repeat;
   /* pour avoir plus d'herbe quand la page s'agrandit */
   background-color: #7fad71;
@@ -117,6 +122,8 @@ h1 {
 }
 
 #bloc-resultats {
+  display: flex;
+  flex-direction: row;
   border-radius: 5px;
   border: #a1a1a1 solid 4px;
   margin-top: 4%;
@@ -125,15 +132,22 @@ h1 {
   padding-left: 3%;
   padding-top: 1%;
   padding-bottom: 3%;
+  visibility: hidden;
 }
 
-#bloc-resultats h3,h4 {
+
+
+#bloc-resultats h2,h3 {
+font-family: pokeFont;
 color: black;
 }
 
+#bloc-resultats audio {
+  width: 50%;
+  }
+
 /* Section de la barre de séparation */
 #section-separation {
-  border-left: 2px dashed var(--main-green);
   margin: 0 20px;
 }
 

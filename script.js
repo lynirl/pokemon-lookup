@@ -19,44 +19,52 @@ function capitalize(text){
  */
 let updatePage = function(data) {
     //reset des anciens résultats
-    view.searchResult.textContent = "";
-    //on parse d'abord parce que sinon ça ne marche pas?????
-    //le data['contents'] c'est pour prendre la partie qui nous intéresse
-    //et qui contient toutes les données
-    //donc pas le status en plus quoi
+    view.result1.innerHTML = "";
+    view.result2.innerHTML = "";
+
     const pokemonData = data;
 
     //on stock le pokemon actuellement recherché
     currPokemon = pokemonData;
     //debug: on a trouvé la bonne information?
     console.log(pokemonData.name);
+    displayPokemon(pokemonData);
 
-    //! update final de la page
-    view.searchResult.innerHTML = "";
-    view.searchResult.innerHTML += `
-    <h3>${capitalize(pokemonData.name)}</h3>
+}
+
+/**
+ * ?displayPokemon
+ * affiche le pokemon sélectionné
+ * @param {*} pokemonData 
+ */
+function displayPokemon(pokemonData){ 
+    //
+    view.searchResult.style.visibility = "visible"; 
+    view.result1.innerHTML += `
+    <h2>${capitalize(pokemonData.name)}</h2>
     <br>
     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>`
 
     //ajouter ses types
-    view.searchResult.innerHTML += `
-    <h4>Types</h4>`
+    view.result1.innerHTML += `
+    <h3>Types</h3>`
     for (let i in pokemonData.types) {
         //note: dans ce cas on parcourt pokemonData -> abilities -> 0 ou 1 -> ability -> name
-        view.searchResult.innerHTML += `<img src='images/types/${pokemonData.types[i].type.name}.png'>`;
+        view.result1.innerHTML += `<img src='images/types/${pokemonData.types[i].type.name}.png'>`;
     };
-    view.searchResult.innerHTML += `
+    view.result1.innerHTML += `
     <br>
-    <h4>Cri</h4>
+    <h3>Cri</h3>
     <audio controls>
         <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokemonData.id}.ogg" type="audio/ogg">
     </audio>`
 
+    
     for(let i in pokemonData.stats){
-        view.searchResult.innerHTML+=
+        view.result2.innerHTML+=
         `<div class = "stat">`
     
-        view.searchResult.innerHTML+=
+        view.result2.innerHTML+=
         `<section class = "ensStat">
             <h3>${pokemonData.stats[i].stat.name}</h3>
         <section id = "att">
@@ -65,56 +73,11 @@ let updatePage = function(data) {
             </section>    
         </section>`
     
-        view.searchResult.innerHTML+=
+        view.result2.innerHTML+=
         `</div>`
     }
-    view.searchResult.innerHTML +=
-    '<button id = "ajouterPokemon">Ajouter a une equipe </button>'
-    view.searchResult.hidden = false;
-
-    //obliger de recuperer des element de la vue ici car l'element est creer après le chargement du view.js
-
-    document.getElementById("ajouterPokemon").addEventListener('click', ajouterPokemon);
-}
-
-function displayPokemon(pokemonData){   
-    view.searchResult.innerHTML += `
-    <h3>${capitalize(pokemonData.name)}</h3>
-    <br>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>`
-
-    //ajouter ses types
-    view.searchResult.innerHTML += `
-    <h4>Types</h4>`
-    for (let i in pokemonData.types) {
-        //note: dans ce cas on parcourt pokemonData -> abilities -> 0 ou 1 -> ability -> name
-        view.searchResult.innerHTML += `<img src='images/types/${pokemonData.types[i].type.name}.png'>`;
-    };
-    view.searchResult.innerHTML += `
-    <br>
-    <h4>Cri</h4>
-    <audio controls>
-        <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokemonData.id}.ogg" type="audio/ogg">
-    </audio>`
-
-    for(let i in pokemonData.stats){
-        view.searchResult.innerHTML+=
-        `<div class = "stat">`
-    
-        view.searchResult.innerHTML+=
-        `<section class = "ensStat">
-            <h3>${pokemonData.stats[i].stat.name}</h3>
-        <section id = "att">
-            <bold>${pokemonData.stats[i].base_stat}</bold>
-            <progress value="${pokemonData.stats[i].base_stat}" max="250"></progress> 
-            </section>    
-        </section>`
-    
-        view.searchResult.innerHTML+=
-        `</div>`
-    }
-    view.searchResult.innerHTML +=
-    '<button id = "ajouterPokemon">Ajouter a une equipe </button>'
+    view.result1.innerHTML +=
+    '<br> <br> <button id = "ajouterPokemon">Ajouter a une equipe </button>'
     view.searchResult.hidden = false;
 
     //obliger de recuperer des element de la vue ici car l'element est creer après le chargement du view.js
@@ -123,7 +86,10 @@ function displayPokemon(pokemonData){
 }
 
 
-//ajout d'un pokemon dans une equipe 
+/**
+ * ?ajouterPokemon
+ * ajoute un Pokemon dans une équipe
+ */
 let ajouterPokemon = function(){
     console.log(equipeList[0]);
     let nom = prompt("A quelle equipe voulez vous ajoutez ce pokemon");
@@ -144,8 +110,6 @@ let ajouterPokemon = function(){
  * actualise la page lorsque tout est bon
  * TODO: gérer les erreurs
  */
-
-
 
 let requeteAjax = async function() {
     view.loader.hidden = false;
