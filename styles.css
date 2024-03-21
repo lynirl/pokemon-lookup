@@ -6,8 +6,8 @@
   --text-color: #fafafa; /* (Texte presque blanc) */
   --background: '#34495e'; /* (Fond bleu foncé) */
   --background-button: #bebebe;
-  --main-green: rgb(216, 53, 53);
-  --active-green: rgb(230, 73, 73);
+  --main-red: rgb(216, 53, 53);
+  --active-red: rgb(230, 73, 73);
   --almost-black: #2d2d2d;
 }
 
@@ -45,7 +45,7 @@ h1 {
   text-align: center;
   font-variant: small-caps;
   font-size: 2.5em;
-  color: var(--main-green);
+  color: var(--main-red);
 }
 
 #explication {
@@ -82,22 +82,21 @@ h1 {
   color: var(--almost-black);
   flex: 1;
   padding: 0.7em;
-  border: 0.3em solid var(--main-green);
+  border: 0.3em solid var(--main-red);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  outline: none;
 }
 
 #bloc-recherche > button {
   padding: 0.8em 0.8em;
   /* Bordure invisible pour que le hover ne bouge pas le bouton */
-  border: 1px solid var(--main-green);
-
-  /* Par défaut, les boutons sont en gris
-	 (S'ils sont "clicables", ils passent en vert) */
-  background-color: var(--background-button);
+  border: 1px solid var(--main-red);
 }
 
 /* Apparences des boutons clicables */
 #bloc-recherche > button.btn_clicable {
-  background-color: var(--main-green);
+  background-color: var(--main-red);
 }
 
 #bloc-recherche > button:focus {
@@ -108,11 +107,11 @@ h1 {
 
 #bloc-recherche > button.btn_clicable:hover {
   cursor: pointer;
-  border: 1px solid white;
+  background-color: var(--active-red);
 }
 
 #bloc-recherche > button.btn_clicable:active {
-  background-color: var(--active-green);
+  background-color: var(--active-red);
 }
 
 /* GIF de chargement (caché par défaut) */
@@ -176,7 +175,7 @@ color: black;
 }
 
 #liste-favoris li span:hover {
-  color: var(--main-green);
+  color: var(--main-red);
 }
 
 /* Media-query pour gérer l'affichage sur petit écran */
@@ -186,7 +185,7 @@ color: black;
   }
 
   #section-separation {
-    border-top: 2px dashed var(--main-green);
+    border-top: 2px dashed var(--main-red);
     margin: 0 -10px 40px -10px;
   }
 
@@ -195,16 +194,17 @@ color: black;
   }
 }
 #newTeam{
-  background-color: red;
-  border-radius: 30px;
+  background-color: rgb(216, 53, 53);
+  border-radius: 5px;
   border: #2d2d2d 2px solid;
-  width: 50px;
+  width: fit-content;
 }
 #ajouterPokemon{
-  background-color: red;
-  border-radius: 30px;
+  background-color: rgb(216, 53, 53);
+  border-radius: 5px;
   border: #2d2d2d 2px solid;
   width: 200px;
+  
 }
 
 button{
