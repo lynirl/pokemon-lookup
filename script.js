@@ -25,7 +25,7 @@ let updatePage = function(data) {
     const pokemonData = data;
 
     //on stock le pokemon actuellement recherché
-    currPokemon = pokemonData;
+    
     //debug: on a trouvé la bonne information?
     console.log(pokemonData.name);
     displayPokemon(pokemonData);
@@ -39,6 +39,7 @@ let updatePage = function(data) {
  */
 function displayPokemon(pokemonData){ 
     //
+    currPokemon = pokemonData;
     view.searchResult.style.visibility = "visible"; 
     view.result1.innerHTML += `
     <h2>${capitalize(pokemonData.name)}</h2>
@@ -91,15 +92,27 @@ function displayPokemon(pokemonData){
  * ajoute un Pokemon dans une équipe
  */
 let ajouterPokemon = function(){
-    console.log(equipeList[0]);
+    console.log(equipeList);
     let nom = prompt("A quelle equipe voulez vous ajoutez ce pokemon");
-
+    let pokemonIn = false; 
     for(let i = 0 ; i< equipeList.length;i++){
         if(equipeList[i]._nom == nom){
+
+            console.log(currPokemon);
+
+            equipeList[i]._pokemons.forEach(pokemon => {
+                if(pokemon.id == currPokemon.id){
+                    pokemonIn = true;
+                }
+            });
+            if(pokemonIn == false){    
             equipeList[i].addPokemon(currPokemon);
             document.getElementById(equipeList[i]._nom).innerHTML += `<img src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currPokemon.id}.png" alt ="blank">`;
             localStorage.setItem('equipeList', JSON.stringify(equipeList));
-        }
+            }else{
+                alert(" Ce pokemon est deja dans l'equipe");
+            }
+    }
     }
 }
 /**
@@ -176,7 +189,8 @@ let loadEquipesFromLocalStorage = function () {
         view.equipeFav.innerHTML += `</div>  </li>`;  
        
                 document.getElementById(equipe._nom).addEventListener('click',function(){
-                    view.searchResult.innerHTML = "";
+                    view.result1.innerHTML = "";
+                    view.result2.innerHTML = "";
                     equipe._pokemons.forEach(pokemon => {
                         displayPokemon(pokemon);
                     });         
