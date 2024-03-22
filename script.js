@@ -96,10 +96,7 @@ let ajouterPokemon = function(){
     let nom = prompt("A quelle equipe voulez vous ajoutez ce pokemon");
     let pokemonIn = false; 
     for(let i = 0 ; i< equipeList.length;i++){
-        if(equipeList[i]._nom == nom){
-
-            console.log(currPokemon);
-
+        if(equipeList[i]._nom == nom  && equipeList[i].isFull() === false){
             equipeList[i]._pokemons.forEach(pokemon => {
                 if(pokemon.id == currPokemon.id){
                     pokemonIn = true;
@@ -112,6 +109,8 @@ let ajouterPokemon = function(){
             }else{
                 alert(" Ce pokemon est deja dans l'equipe");
             }
+    }else if (equipeList[i].isFull() === true){
+        alert("Cette equipe est complete ! ");
     }
     }
 }
@@ -150,7 +149,24 @@ let requeteAjax = async function() {
 }
 
 let newTeam =function() {
+    let equipeExist =  false;
+
+    
     let nom = prompt("Veuillez entrer un nom d'equipe :");
+    equipeList.forEach(equipe => {
+        if(equipe._nom == nom){
+            equipeExist = true;
+        }
+    });
+    while(equipeExist == true){
+        nom = prompt("Ce nom d'equipe existe deja ! Veuillez entrer un nouveau nom d'equipe :");
+        equipeExist = false;
+        equipeList.forEach(equipe => {
+            if(equipe._nom == nom){
+                equipeExist = true;
+            }
+        });
+    }
     let equipe = new Equipe(nom);
     equipeList.push(equipe);
     view.equipeFav.innerHTML += 
@@ -188,14 +204,18 @@ let loadEquipesFromLocalStorage = function () {
         }      
         view.equipeFav.innerHTML += `</div>  </li>`;  
        
-                document.getElementById(equipe._nom).addEventListener('click',function(){
-                    view.result1.innerHTML = "";
-                    view.result2.innerHTML = "";
-                    equipe._pokemons.forEach(pokemon => {
-                        displayPokemon(pokemon);
-                    });         
-        });
+                
     });
+    equipeList.forEach(equipe => {
+        document.getElementById(equipe._nom).addEventListener('click',function(){
+            view.result1.innerHTML = "";
+            view.result2.innerHTML = "";
+            equipe._pokemons.forEach(pokemon => {
+                displayPokemon(pokemon);
+            });         
+    });
+    });
+    
     }
 }
 

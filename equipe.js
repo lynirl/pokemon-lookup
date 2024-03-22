@@ -18,19 +18,14 @@ class Equipe{
         this._pokemons = pokemons;
     }
     isFull(){
-        if(this._pokemons.length >= 6 ){
-            return true;
-        }else{
-            return false;
-        }
+        return this._pokemons.length == 6 ;
     }
 
     addPokemon(pokemon){
         if(this.isFull === true){
             throw "Cette equipe est complete";
-        }else{
-            this._pokemons.push(pokemon);
         }
+            this._pokemons.push(pokemon);
     }
 
     storeTeam(){
