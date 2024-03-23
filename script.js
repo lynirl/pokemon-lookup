@@ -90,7 +90,7 @@ function displayPokemon(pokemonData){
  */
 let ajouterPokemon = function(){
     console.log(equipeList);
-    let nom = prompt("A quelle equipe voulez vous ajoutez ce pokemon");
+    let nom = prompt("Which team do you want to add this Pokémon to?");
     let pokemonIn = false; 
     for(let i = 0 ; i< equipeList.length;i++){
         if(equipeList[i]._nom == nom  && equipeList[i].isFull() === false){
@@ -104,10 +104,10 @@ let ajouterPokemon = function(){
             document.getElementById(equipeList[i]._nom).innerHTML += `<img src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currPokemon.id}.png" alt ="blank">`;
             localStorage.setItem('equipeList', JSON.stringify(equipeList));
             }else{
-                alert(" Ce pokemon est deja dans l'equipe");
+                alert("This Pokémon is already in this team.");
             }
     }else if (equipeList[i].isFull() === true){
-        alert("Cette equipe est complete ! ");
+        alert("This team is full!");
     }
     }
 }
