@@ -120,20 +120,29 @@ h1 {
   text-align: center;
 }
 
+#error{
+  color: red;
+  font-weight: bold;
+}
+
 #bloc-resultats {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   border-radius: 5px;
+  justify-content: space-between;
   border: #a1a1a1 solid 4px;
-  margin-top: 4%;
   background-color: #fafafa;
+
   width: 50%;
+  margin-top: 4%;
   padding-left: 3%;
+  padding-right: 3%;
   padding-top: 1%;
   padding-bottom: 3%;
+
   visibility: hidden;
 }
-
 
 
 #bloc-resultats h2,h3 {
@@ -167,6 +176,7 @@ color: black;
 
 #liste-favoris li {
   margin-bottom: 8px;
+  list-style-type: none;
   cursor: pointer;
 }
 
@@ -194,13 +204,13 @@ color: black;
   }
 }
 #newTeam{
-  background-color: rgb(216, 53, 53);
+  background-color: var(--main-red);
   border-radius: 5px;
   border: #2d2d2d 2px solid;
   width: fit-content;
 }
 #ajouterPokemon{
-  background-color: rgb(216, 53, 53);
+  background-color: var(--main-red);
   border-radius: 5px;
   border: #2d2d2d 2px solid;
   width: 200px;

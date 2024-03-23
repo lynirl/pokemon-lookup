@@ -63,22 +63,20 @@ function displayPokemon(pokemonData){
     
     for(let i in pokemonData.stats){
         view.result2.innerHTML+=
-        `<div class = "stat">`
-    
-        view.result2.innerHTML+=
-        `<section class = "ensStat">
+        `
+        <section class = "ensStat">
             <h3>${pokemonData.stats[i].stat.name}</h3>
         <section id = "att">
             <bold>${pokemonData.stats[i].base_stat}</bold>
             <progress value="${pokemonData.stats[i].base_stat}" max="250"></progress> 
             </section>    
         </section>`
-    
-        view.result2.innerHTML+=
-        `</div>`
+        
     }
+    view.result2.innerHTML +=`<br>`
     view.result1.innerHTML +=
-    '<br> <br> <button id = "ajouterPokemon">Ajouter a une equipe </button>'
+    '<br> <br> <button id = "ajouterPokemon">Add to a team </button>'
+    view.result2.innerHTML +=`<br>`
     view.searchResult.hidden = false;
 
     //obliger de recuperer des element de la vue ici car l'element est creer après le chargement du view.js
@@ -119,36 +117,49 @@ let ajouterPokemon = function(){
  * va chercher les informations en récupérant le nom indiqué dans la barre de recherche
  * puis utilise le proxy allorigins pour fetch
  * 
- * actualise la page lorsque tout est bon
- * TODO: gérer les erreurs
+ * actualise la page lorsque tout est bon, ou affiche un message d'erreur
  */
 
 let requeteAjax = async function() {
     view.loader.hidden = false;
-    //on récupère le nom du pokémon et on construit le lien en fonction
+    //si le champ est vide on met direct un message
+    if(view.pokemonFind.value == ""){
+        view.error.innerHTML+="Please enter a Pokémon name!"
+    } else {
+        //on récupère le nom du pokémon et on construit le lien en fonction
     //toLowerCase pour que l'api l'accepte
-    let nomPokemon = view.pokemonFind.value.toLowerCase();
-    let lien = 'https://pokeapi.co/api/v2/pokemon/'.concat(nomPokemon);
-
-    //debug: on a le bon lien?
-    console.log(lien);
-
-    //requête asynchrone
-    //let responseObj = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(lien)}`);
-    let responseObj = await fetch(lien);
-    //afficher les résultats de la requête si c'est bon
-    if(responseObj.ok) {
-        //on récupère le json de la requête
-        let jsonData = await responseObj.json();
-        //debug: on a les bonnes données?
-        console.log(jsonData);
-        //update la page
-        updatePage(jsonData);
+        let nomPokemon = view.pokemonFind.value.toLowerCase();
+        let lien = 'https://pokeapi.co/api/v2/pokemon/'.concat(nomPokemon);
+    
+        //debug: on a le bon lien?
+        console.log(lien);
+    
+        //requête asynchrone
+        //let responseObj = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(lien)}`);
+        let responseObj = await fetch(lien);
+        //afficher les résultats de la requête si c'est bon
+        if(responseObj.ok) {
+            //on récupère le json de la requête
+            let jsonData = await responseObj.json();
+            //debug: on a les bonnes données?
+            console.log(jsonData);
+            //update la page
+            //si il y avait une erreur on l'enlève
+            view.error.innerHTML = ""
+            updatePage(jsonData);
+        } else {
+            //si le pokémon n'est pas trouvé on a une erreur
+            view.error.innerHTML+=`This Pokémon doesn't exist!`;
+        };
     };
     view.loader.hidden = true;
 }
 
-let newTeam =function() {
+/**
+ * ?newTeam
+ * crée une nouvelle équipe
+ */
+let newTeam = function() {
     let equipeExist =  false;
 
     

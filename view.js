@@ -9,6 +9,7 @@ const view = {
     result1: document.getElementById("result1"),
     result2: document.getElementById("result2"),
 
+    error: document.getElementById("error"),
     loader: document.getElementById("bloc-gif-attente"),
 
     imgPoke: document.getElementById("imgPoke"),
