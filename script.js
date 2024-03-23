@@ -40,10 +40,9 @@ let updatePage = function(data) {
 function displayPokemon(pokemonData){ 
     //
     currPokemon = pokemonData;
-    view.searchResult.style.visibility = "visible"; 
+    view.searchResult.style.visibility = "visible";
     view.result1.innerHTML += `
     <h2>${capitalize(pokemonData.name)}</h2>
-    <br>
     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>`
 
     //ajouter ses types
@@ -54,7 +53,6 @@ function displayPokemon(pokemonData){
         view.result1.innerHTML += `<img src='images/types/${pokemonData.types[i].type.name}.png'>`;
     };
     view.result1.innerHTML += `
-    <br>
     <h3>Cri</h3>
     <audio controls>
         <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokemonData.id}.ogg" type="audio/ogg">
@@ -73,10 +71,11 @@ function displayPokemon(pokemonData){
         </section>`
         
     }
-    view.result2.innerHTML +=`<br>`
+
+
     view.result1.innerHTML +=
     '<br> <br> <button id = "ajouterPokemon">Add to a team </button>'
-    view.result2.innerHTML +=`<br>`
+    view.result1.innerHTML +=`<section id="pokes-separation"></section>`
     view.searchResult.hidden = false;
 
     //obliger de recuperer des element de la vue ici car l'element est creer après le chargement du view.js
@@ -124,7 +123,7 @@ let requeteAjax = async function() {
     view.loader.hidden = false;
     //si le champ est vide on met direct un message
     if(view.pokemonFind.value == "" | view.pokemonFind.value == "."){
-        view.error.innerHTML+="Please enter a Pokémon name!"
+        view.error.innerHTML="Please enter a Pokémon name!"
     } else {
         //on récupère le nom du pokémon et on construit le lien en fonction
     //toLowerCase pour que l'api l'accepte
@@ -149,7 +148,7 @@ let requeteAjax = async function() {
             updatePage(jsonData);
         } else {
             //si le pokémon n'est pas trouvé on a une erreur
-            view.error.innerHTML+=`This Pokémon doesn't exist!`;
+            view.error.innerHTML=`This Pokémon doesn't exist!`;
         };
     };
     view.loader.hidden = true;
@@ -223,6 +222,7 @@ let loadEquipesFromLocalStorage = function () {
             view.result2.innerHTML = "";
             equipe._pokemons.forEach(pokemon => {
                 displayPokemon(pokemon);
+                view.result1.innerHTML +=`<hr>`
             });         
     });
     });

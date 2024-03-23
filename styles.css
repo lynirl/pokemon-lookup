@@ -135,11 +135,12 @@ h1 {
   background-color: #fafafa;
 
   width: 50%;
+  height: fit-content;
   margin-top: 4%;
   padding-left: 3%;
   padding-right: 3%;
   padding-top: 1%;
-  padding-bottom: 3%;
+  padding-bottom: 1%;
 
   visibility: hidden;
 }
@@ -154,9 +155,48 @@ color: black;
   width: 50%;
   }
 
+#bloc-resultats hr {
+  border: solid 1px var(--main-red);
+}
+
+/* les progress bar */
+
+progress::-moz-progress-bar {
+  background-color: var(--active-red);
+}
+
+progress::-webkit-progress-value {
+  background: red;
+}
+
+progress::-webkit-progress-bar {
+  background: blue;
+}
+
+/* ----------------------- */
+
+/* je me BATS avec les STATS RAHHHHHHHH */
+.ensStat{
+  height: 2.1%;
+}
+
+.ensStat h3 {
+  height: 1.5%;;
+}
+
+.ensStat bold {
+  color: #2d2d2d;
+}
+
+/* ----------------------- */
+
 /* Section de la barre de séparation */
 #section-separation {
   margin: 0 20px;
+}
+
+#pokes-separation{
+  margin-bottom: 100px;
 }
 
 /* Section des recherches favorites */
@@ -208,15 +248,26 @@ color: black;
   border-radius: 5px;
   border: #2d2d2d 2px solid;
   width: fit-content;
+
+  color: #f0f0f0;
+  font-family: pokeFont;
+  font-size: larger;
 }
+
 #ajouterPokemon{
   background-color: var(--main-red);
   border-radius: 5px;
   border: #2d2d2d 2px solid;
   width: 200px;
-  
+
+  color: #f0f0f0;
+  font-family: pokeFont;
+  font-size: larger;
 }
+
 
 button{
   color: #2d2d2d;
+  font-family: pokeFont;
+  font-size: larger;
 }
