@@ -234,7 +234,7 @@ progress::-webkit-progress-bar {
     flex: 0;
   }
 }
-#newTeam{
+#newTeam, #delTeam, #delPoke{
   background-color: var(--main-red);
   border-radius: 5px;
   border: #2d2d2d 2px solid;

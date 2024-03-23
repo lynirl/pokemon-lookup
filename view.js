@@ -27,8 +27,10 @@ const view = {
     vit: document.getElementById("vit"),
 
     btnTeam: document.getElementById("newTeam"),
+    delTeam: document.getElementById("delTeam"),
+    delPoke: document.getElementById("delPoke"),
 
-    equipeFav: document.getElementById("liste-favoris")
+    equipeFav: document.getElementById("liste-favoris"),
 
      
 }

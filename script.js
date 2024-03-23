@@ -162,14 +162,14 @@ let newTeam = function() {
     let equipeExist =  false;
 
     
-    let nom = prompt("Veuillez entrer un nom d'equipe :");
+    let nom = prompt("Please enter a name for your team:");
     equipeList.forEach(equipe => {
         if(equipe._nom == nom){
             equipeExist = true;
         }
     });
     while(equipeExist == true){
-        nom = prompt("Ce nom d'equipe existe deja ! Veuillez entrer un nouveau nom d'equipe :");
+        nom = prompt("There is already a team with that name, please enter a new one:");
         equipeExist = false;
         equipeList.forEach(equipe => {
             if(equipe._nom == nom){
@@ -188,6 +188,76 @@ let newTeam = function() {
     </li>`;
     localStorage.setItem('equipeList', JSON.stringify(equipeList));
     
+}
+
+/**
+ * ?deleteTeam
+ * supprimer une équipe
+ */
+let deleteTeam = function() {
+    let team = prompt("Which team do you want to delete?");
+    //on récupère les équipes
+    const storedEquipeList = localStorage.getItem('equipeList');
+    //et on les parcourt
+    equipeList = JSON.parse(storedEquipeList);
+    
+    //debug
+    console.log(equipeList);
+    
+    //parcourir pour de vrai les équipes
+    equipeList.forEach(equipe => {
+        console.log(equipe);
+        console.log(equipe._nom);
+        console.log(team);
+        //si le nom de l'équipe actuelle correspond à celle qu'on veut delete
+        if(team == equipe._nom){
+            //on récupère son index
+            let index = equipeList.indexOf(equipe);
+            //et on l'enlève
+            equipeList.splice(index, 1);
+        };
+    });
+
+    localStorage.setItem('equipeList', JSON.stringify(equipeList));
+    alert('Team deleted');
+}
+
+/**
+ * ?deletePokemon
+ * Enlève un pokémon d'une équipe
+ */
+let deletePokemon = function(){
+    let team = prompt("Which team do you want to remove a Pokémon from?");
+    //on récupère les équipes
+    const storedEquipeList = localStorage.getItem('equipeList');
+    //et on les parcourt
+    equipeList = JSON.parse(storedEquipeList);
+    
+    //parcourir équipes pour la trouver
+    equipeList.forEach(equipe => {
+        if(team == equipe._nom){
+            let pokeName = prompt("Which Pokémon from " + team + " do you want to remove?");
+            let pokemons = equipe._pokemons;
+            //parcourir pokémons de cette équipe pour trouver celui qu'on veut delete
+            pokemons.forEach(pokemon => {
+                console.log(pokemon.name);
+                //si on le trouve on l'enlève
+                //tolowercase pour pouvoir comparer
+                if(pokeName.toLowerCase() == pokemon.name){
+                    pokemons.splice(pokemons.indexOf(pokemon), 1);
+                    localStorage.setItem('equipeList', JSON.stringify(equipeList));
+                } else {
+                    //sinon erreur
+                    alert('Pokemon not found!');
+                };
+            });
+            
+        } else {
+            //si la mauvaise équipe est entrée
+            //TODO: réparer ça dcp
+            team = alert('This team does not exist, please try again');
+        };
+    });
 }
 
 // Fonction pour charger les équipes depuis le local storage
@@ -235,8 +305,12 @@ let loadEquipesFromLocalStorage = function () {
 
 //event du bouton de recherche
 view.boutonSearch.addEventListener('click', requeteAjax);
-
+//event du bouton pour créer une équipe
 view.btnTeam.addEventListener('click',newTeam);
+//event du bouton pour supprimer une équipe
+view.delTeam.addEventListener('click',deleteTeam);
+//event du bouton pour supprimer un pokémon d'une équipe
+view.delPoke.addEventListener('click',deletePokemon);
 
 window.addEventListener('load', loadEquipesFromLocalStorage);
 
