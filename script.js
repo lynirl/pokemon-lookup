@@ -123,7 +123,7 @@ let ajouterPokemon = function(){
 let requeteAjax = async function() {
     view.loader.hidden = false;
     //si le champ est vide on met direct un message
-    if(view.pokemonFind.value == ""){
+    if(view.pokemonFind.value == "" | view.pokemonFind.value == "."){
         view.error.innerHTML+="Please enter a Pokémon name!"
     } else {
         //on récupère le nom du pokémon et on construit le lien en fonction
