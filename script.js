@@ -229,4 +229,11 @@ view.btnTeam.addEventListener('click',newTeam);
 
 window.addEventListener('load', loadEquipesFromLocalStorage);
 
-
+//si on appuie sur entrée ça recherche
+pokemonFind.addEventListener("keyup", function(event) {
+    //pq c'est le code pour la touche entrée
+    if (event.keyCode === 13) {
+      //on clique sur le bouton
+      view.boutonSearch.click();
+    }
+  });
