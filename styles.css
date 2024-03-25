@@ -161,6 +161,11 @@ color: black;
 
 /* les progress bar */
 
+progress{
+  -webkit-appearance: none;
+   appearance: none;
+}
+
 progress::-moz-progress-bar {
   background-color: var(--active-red);
 }
