@@ -67,7 +67,7 @@ function displayPokemon(pokemonData){
         <section id = "att">
             <bold>${pokemonData.stats[i].base_stat}</bold>
             <progress id = "${pokemonData.id}"value="${pokemonData.stats[i].base_stat}" max="250"></progress> 
-            </section>    
+            </section>
         </section>`;
     }
      
@@ -267,7 +267,10 @@ let deletePokemon = function(){
     }
 }
 
-// Fonction pour charger les équipes depuis le local storage
+/**
+ * ?loadEquipesFromLocalStorage
+ * Charge les équipes depuis le local storage
+ */
 let loadEquipesFromLocalStorage = function () {
     //recupere les equipes depuis le localStorage
     const storedEquipeList = localStorage.getItem('equipeList');
@@ -309,6 +312,9 @@ let loadEquipesFromLocalStorage = function () {
 }
 
 
+/**
+ * Évènements
+ */
 
 
 //event du bouton de recherche
