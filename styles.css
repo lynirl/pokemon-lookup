@@ -262,3 +262,6 @@ button{
   font-family: pokeFont;
   font-size: larger;
 }
+#pokemonFind[list] {
+  display: none;
+}

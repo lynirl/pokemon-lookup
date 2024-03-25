@@ -32,5 +32,5 @@ const view = {
 
     equipeFav: document.getElementById("liste-favoris"),
 
-     
+    pokemonList: document.getElementById("pokemonList")
 }

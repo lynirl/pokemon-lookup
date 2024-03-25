@@ -24,7 +24,7 @@
       <section id="section-recherche">
         <div id="bloc-recherche">
           <!-- Champ de recherche -->
-          <input type="text" id = "pokemonFind" placeholder="What Pokémon do you need?" />
+          <input type="text" id = "pokemonFind" placeholder="What Pokémon do you need?" list="pokemonList" />
 
           <!-- Boutons -->
           <button
@@ -56,7 +56,9 @@
         </div>
         
       </section>
-
+      <datalist id="pokemonList">
+       
+      </datalist>
       <!-- Section de séparation (invisible) -->
       <section id="section-separation"></section>
 
@@ -74,8 +76,10 @@
         </ul>
       </section>
     </main>
+    
     <script src = "equipe.js"></script>
     <script src = "view.js"> </script>
+    <script src = "dataList.js"> </script>
     <script src = "script.js"></script>
   </body>
 </html>
