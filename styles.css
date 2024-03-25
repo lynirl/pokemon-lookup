@@ -171,11 +171,11 @@ progress::-moz-progress-bar {
 }
 
 progress::-webkit-progress-value {
-  background: red;
+  background: var(--active-red);
 }
 
 progress::-webkit-progress-bar {
-  background: blue;
+  background: var(--active-red);
 }
 
 /* ----------------------- */
