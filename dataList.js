@@ -992,9 +992,7 @@ let pokemonNames = Array.from(view.pokemonList.options).map(function(option) {
 });
 
 view.pokemonFind.addEventListener('input', function() {
-  let userInput = view.pokemonFind.value.toLowerCase(); // Convertir en minuscules pour être insensible à la casse
-  
-  // Filtrer la liste des noms de Pokémon à chaque saisie utilisateur
+ // Filtrer la liste des noms de Pokémon à chaque saisie utilisateur
   let filteredSuggestions = pokemonNames.filter(function(pokemon) {
       return pokemon.startsWith(userInput);
   });
