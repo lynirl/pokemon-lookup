@@ -178,7 +178,7 @@ progress::-webkit-progress-bar {
   background: gray;
 }
 
-/* ----------------------- */
+/* -------les stats------- */
 
 .ensStat bold {
   color: #2d2d2d;
@@ -238,6 +238,8 @@ progress::-webkit-progress-bar {
   #section-favoris {
     flex: 0;
   }
+
+/* Création / Suppression d'équipes, retirer un Pokémon */
 }
 #newTeam, #delTeam, #delPoke{
   background-color: var(--main-red);
@@ -261,12 +263,16 @@ progress::-webkit-progress-bar {
   font-size: larger;
 }
 
+/* Les boutons */
 
 button{
   color: #2d2d2d;
   font-family: pokeFont;
   font-size: larger;
 }
+
+/* Les suggestions de la barre de recherche */
+
 #pokemonFind[list] {
   display: none;
 }
