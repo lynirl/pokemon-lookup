@@ -66,12 +66,11 @@ function displayPokemon(pokemonData){
             <h3>${pokemonData.stats[i].stat.name}</h3>
         <section id = "att">
             <bold>${pokemonData.stats[i].base_stat}</bold>
-            <progress value="${pokemonData.stats[i].base_stat}" max="250"></progress> 
+            <progress id = "${pokemonData.id}"value="${pokemonData.stats[i].base_stat}" max="250"></progress> 
             </section>    
-        </section>`
-        
+        </section>`;
     }
-
+     
 
     view.result1.innerHTML +=
     '<br> <br> <button id = "ajouterPokemon">Add to a team </button>'
@@ -236,6 +235,7 @@ let deleteTeam = function() {
  */
 let deletePokemon = function(){
     let teamExist = false;
+    let pokemonExist = false;
     let team = prompt("Which team do you want to remove a Pokémon from?");  
     //parcourir équipes pour la trouver
     equipeList.forEach(equipe => {
@@ -249,20 +249,21 @@ let deletePokemon = function(){
                 //si on le trouve on l'enlève
                 //tolowercase pour pouvoir comparer
                 if(pokeName.toLowerCase() == pokemon.name.toLowerCase()){
+                    pokemonExist = true;
                     pokemons.splice(pokemons.indexOf(pokemon), 1);
                     localStorage.setItem('equipeList', JSON.stringify(equipeList));
-                    alert( pokeName + " remove !!");
+                    alert( pokeName + " is removed .");
                     location.reload();
-                } else {
-                    //sinon erreur
-                    alert('Pokemon not found!');
-                };
+                } 
             });
             
         } 
     });
     if(teamExist == false){
         team = alert('This team does not exist, please try again');
+    }
+    if(pokemonExist == false && teamExist == true){
+        alert("Pokemon not found")
     }
 }
 
