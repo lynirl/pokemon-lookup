@@ -174,10 +174,6 @@ progress::-webkit-progress-value {
   background: var(--active-red);
 }
 
-progress::-webkit-progress-bar {
-  background: var(--active-red);
-}
-
 /* ----------------------- */
 
 .ensStat bold {
