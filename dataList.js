@@ -1,3 +1,4 @@
+
 view.pokemonList.innerHTML = 
 `<option value="Bulbasaur">
 <option value="Ivysaur">
@@ -984,3 +985,29 @@ view.pokemonList.innerHTML =
         <option value="Glastrier">
         <option value="Spectrier">
         <option value="Calyrex">`
+
+// Conserver une copie non modifiée de la liste des noms de Pokémon
+let pokemonNames = Array.from(view.pokemonList.options).map(function(option) {
+  return option.value.toLowerCase();
+});
+
+view.pokemonFind.addEventListener('input', function() {
+  let userInput = view.pokemonFind.value.toLowerCase(); // Convertir en minuscules pour être insensible à la casse
+  
+  // Filtrer la liste des noms de Pokémon à chaque saisie utilisateur
+  let filteredSuggestions = pokemonNames.filter(function(pokemon) {
+      return pokemon.startsWith(userInput);
+  });
+
+  // Mettre à jour le contenu de la liste déroulante avec les suggestions filtrées
+  view.pokemonList.innerHTML = generateOptions(filteredSuggestions);
+});
+
+// Fonction pour générer les options HTML à partir des suggestions filtrées
+function generateOptions(suggestions) {
+  var optionsHTML = '';
+  suggestions.forEach(function(option) {
+      optionsHTML += `<option value="${option}">${option}</option>`;
+  });
+  return optionsHTML;
+}
