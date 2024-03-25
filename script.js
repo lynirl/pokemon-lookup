@@ -178,7 +178,7 @@ let newTeam = function() {
             equipeExist = true;
         }
     });
-    while(equipeExist == true | nom == ""){
+    while(equipeExist == true | nom == "" | nom == null){
         nom = prompt("There is already a team with that name or the name is invalid, please enter a new one:");
         equipeExist = false;
         equipeList.forEach(equipe => {
@@ -235,10 +235,12 @@ let deleteTeam = function() {
  * Enlève un pokémon d'une équipe
  */
 let deletePokemon = function(){
+    let teamExist = false;
     let team = prompt("Which team do you want to remove a Pokémon from?");  
     //parcourir équipes pour la trouver
     equipeList.forEach(equipe => {
         if(team == equipe._nom){
+            teamExist = true;
             let pokeName = prompt("Which Pokémon from " + team + " do you want to remove?");
             let pokemons = equipe._pokemons;
             //parcourir pokémons de cette équipe pour trouver celui qu'on veut delete
@@ -257,12 +259,11 @@ let deletePokemon = function(){
                 };
             });
             
-        } else if(team == equipe._nom) {
-            //si la mauvaise équipe est entrée
-            //TODO: réparer ça dcp
-            team = alert('This team does not exist, please try again');
-        };
+        } 
     });
+    if(teamExist == false){
+        team = alert('This team does not exist, please try again');
+    }
 }
 
 // Fonction pour charger les équipes depuis le local storage
